@@ -2,6 +2,7 @@
 
 set -ouex pipefail
 
+rpm -qa | sort
 
 # Repos
 
