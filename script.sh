@@ -6,7 +6,7 @@ rpmfusion=(
     "https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm"
     "https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm"
 )
-rpm -q rpmfusion-free-release rpmfusion-nonfree-release || dnf install ${rpmfusion[@]}
+rpm -q rpmfusion-free-release rpmfusion-nonfree-release || dnf install -y ${rpmfusion[@]}
 
 remove_packages=(
 "firefox"
