@@ -10,6 +10,10 @@ rpmfusion=(
     "https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm"
 )
 
+copr=(
+"xxmitsu/mesa-git"
+)
+
 # Packages
 
 remove_packages=(
@@ -38,9 +42,9 @@ install_packages=(
 
 # DNF
 
-dnf install -y ${rpmfusion[@]}
-dnf copr enable -y xxmitsu/mesa-git
 dnf remove -y ${remove_packages[@]}
+dnf install -y ${rpmfusion[@]}
+dnf copr enable -y ${copr[@]}
 dnf install -y ${install_packages[@]}
 dnf autoremove -y
 dnf upgrade -y
