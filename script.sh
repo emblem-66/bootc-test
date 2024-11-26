@@ -35,7 +35,7 @@ install_packages=(
 dnf remove -y ${remove_packages[@]}
 dnf install -y ${install_packages[@]}
 dnf autoremove -y
-dnf copr enable xxmitsu/mesa-git -y
+dnf copr enable -y xxmitsu/mesa-git
 dnf upgrade -y
 rpm -qa | sort | grep mesa
 
