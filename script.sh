@@ -2,11 +2,15 @@
 
 set -ouex pipefail
 
+
+# Repos
+
 rpmfusion=(
     "https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm"
     "https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm"
 )
-dnf install -y ${rpmfusion[@]}
+
+# Packages
 
 remove_packages=(
 "firefox"
@@ -32,15 +36,15 @@ install_packages=(
 "ffmpegthumbnailer"
 )
 
+# DNF
+
+dnf install -y ${rpmfusion[@]}
+dnf copr enable -y xxmitsu/mesa-git
 dnf remove -y ${remove_packages[@]}
 dnf install -y ${install_packages[@]}
 dnf autoremove -y
-dnf copr enable -y xxmitsu/mesa-git
+dnf upgrade -y
 
+# Checkout
 
-dnf install -y ${rpmfusion[@]}
-
-rpm -qa | sort | grep mesa
-
-git clone https://github.com/mukul29/legacy-theme-auto-switcher-gnome-extension.git /usr/share/gnome-shell/extensions/legacyschemeautoswitcher@joshimukul29.gmail.com
-git clone https://github.com/joaophi/tailscale-gnome-qs.git /tmp && mv /tmp/tailscale@joaophi.github.com /usr/share/gnome-shell/extensions/
+rpm -qa | sort
