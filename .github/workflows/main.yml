@@ -1,0 +1,29 @@
+name: akubgsiegjsg
+
+on:
+  schedule:
+    - cron: "0 6 * * 5"
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - '**.md'
+      - '**.txt'
+  workflow_dispatch:
+
+jobs: 
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Push to Registry action
+      uses: actions/checkout@v4
+    - name: Build Image
+      shell: bash
+      run: podman build . -t ghcr.io/emblem-66/akubgsiegjsg:latest
+    - name: Login to ghcr.io
+      shell: bash
+      run: podman login ghcr.io -u Emblem-66 -p ${{ secrets.GITHUB_TOKEN }}
+    - name: Push Image to ghcr.io
+      shell: bash
+      run: podman push ghcr.io/emblem-66/akubgsiegjsg:latest
+      
