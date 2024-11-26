@@ -32,11 +32,11 @@ install_packages=(
 "ffmpegthumbnailer"
 )
 
-dnf remove ${remove_packages[@]}
-dnf install ${install_packages[@]}
-dnf autoremove
-dnf copr enable xxmitsu/mesa-git
-dnf upgrade
+dnf remove -y ${remove_packages[@]}
+dnf install -y ${install_packages[@]}
+dnf autoremove -y
+dnf copr enable xxmitsu/mesa-git -y
+dnf upgrade -y
 rpm -qa | sort | grep mesa
 
 git clone https://github.com/mukul29/legacy-theme-auto-switcher-gnome-extension.git /usr/share/gnome-shell/extensions/legacyschemeautoswitcher@joshimukul29.gmail.com
