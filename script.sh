@@ -60,9 +60,8 @@ dnf copr enable -y ${copr[@]}
 dnf install -y ${gnome[@]}
 dnf install -y ${gaming[@]}
 dnf install -y ${install_packages[@]}
-dnf autoremove -y
 dnf upgrade -y
-
-# Checkout
+dnf autoremove -y
+dnf clean -y
 
 rpm -qa | sort
