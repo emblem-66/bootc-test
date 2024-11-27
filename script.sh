@@ -58,6 +58,7 @@ dnf install -y dnf5-plugins
 dnf install -y ${rpmfusion[@]}
 dnf copr enable -y ${copr[@]}
 dnf install -y ${gnome[@]}
+dnf install -y ${gaming[@]}
 dnf install -y ${install_packages[@]}
 dnf autoremove -y
 dnf upgrade -y
