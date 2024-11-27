@@ -17,6 +17,10 @@ copr=(
 
 # Packages
 
+gaming=(
+"steam"
+"goverlay"
+)
 
 gnome=(
 "gnome-shell"
