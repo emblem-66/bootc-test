@@ -43,9 +43,10 @@ install_packages=(
 
 # DNF
 
+dnf install -y dnf5-plugins
 dnf remove -y ${remove_packages[@]}
 dnf install -y ${rpmfusion[@]}
-dnf copr enable ${copr[@]} -y
+dnf copr enable -y ${copr[@]}
 dnf install -y ${install_packages[@]}
 dnf autoremove -y
 dnf upgrade -y
