@@ -17,6 +17,12 @@ copr=(
 
 # Packages
 
+
+gnome=(
+"gnome-shell"
+"nautilus"
+)
+
 remove_packages=(
 "firefox"
 "firefox-langpacks"
@@ -44,9 +50,10 @@ install_packages=(
 # DNF
 
 dnf install -y dnf5-plugins
-dnf remove -y ${remove_packages[@]}
+#dnf remove -y ${remove_packages[@]}
 dnf install -y ${rpmfusion[@]}
 dnf copr enable -y ${copr[@]}
+dnf install -y ${gnome[@]}
 dnf install -y ${install_packages[@]}
 dnf autoremove -y
 dnf upgrade -y
