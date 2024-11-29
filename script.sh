@@ -62,6 +62,5 @@ dnf install -y ${gaming[@]}
 dnf install -y ${install_packages[@]}
 dnf upgrade -y
 dnf autoremove -y
-dnf clean -y
 
 rpm -qa | sort
