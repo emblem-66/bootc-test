@@ -29,6 +29,7 @@ gnome=(
 
 cinnamon=(
 "cinnamon"
+"nemo"
 )
 
 remove_packages=(
