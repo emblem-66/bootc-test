@@ -70,3 +70,6 @@ dnf upgrade -y
 dnf autoremove -y
 
 rpm -qa | sort
+
+dnf install -y neofetch
+neofetch
