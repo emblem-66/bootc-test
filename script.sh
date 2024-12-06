@@ -27,6 +27,10 @@ gnome=(
 "nautilus"
 )
 
+cinnamon=(
+"cinnamon"
+)
+
 remove_packages=(
 "firefox"
 "firefox-langpacks"
@@ -57,7 +61,8 @@ dnf install -y dnf5-plugins
 #dnf remove -y ${remove_packages[@]}
 dnf install -y ${rpmfusion[@]}
 dnf copr enable -y ${copr[@]}
-dnf install -y ${gnome[@]}
+#dnf install -y ${gnome[@]}
+dnf install -y ${cinnamon[@]}
 dnf install -y ${gaming[@]}
 dnf install -y ${install_packages[@]}
 dnf upgrade -y
