@@ -71,6 +71,5 @@ dnf autoremove -y
 
 rpm -qa | sort
 
-dnf install -y fastfetch afetch
+dnf install -y fastfetch
 fastfetch
-afetch
