@@ -15,13 +15,13 @@ rpmfusion=(
 
 copr=(
 "xxmitsu/mesa-git"
+"g3tchoo/prismlauncher"
 )
-
-# Packages
 
 gaming=(
 "steam"
 "goverlay"
+"prismlauncher"
 )
 
 gnome=(
@@ -68,8 +68,6 @@ dnf copr enable -y ${copr[@]}
 dnf install -y ${cinnamon[@]}
 dnf install -y ${gaming[@]}
 dnf install -y ${install_packages[@]}
-dnf install -y --repofrompath 'terra,https://repos.fyralabs.com/terra$releasever' --setopt='terra.gpgkey=https://repos.fyralabs.com/terra$releasever/key.asc' terra-release
-dnf install -y prismlauncher
 dnf upgrade -y
 dnf autoremove -y
 
