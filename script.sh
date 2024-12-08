@@ -11,12 +11,8 @@ rpmfusion=(
     "https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm"
 )
 
-
-
-copr=(
-"xxmitsu/mesa-git"
-"g3tchoo/prismlauncher"
-)
+dnf copr enable -y xxmitsu/mesa-git
+dnf copr enable -y g3tchoo/prismlauncher
 
 gaming=(
 "steam"
@@ -63,7 +59,7 @@ install_packages=(
 dnf install -y dnf5-plugins
 #dnf remove -y ${remove_packages[@]}
 dnf install -y ${rpmfusion[@]}
-dnf copr enable -y ${copr[@]}
+#dnf copr enable -y ${copr[@]}
 #dnf install -y ${gnome[@]}
 dnf install -y ${cinnamon[@]}
 dnf install -y ${gaming[@]}
