@@ -58,15 +58,15 @@ remove_packages=(
 )
 
 # DNF
-dnf install -y dnf5-plugins
+#dnf install -y dnf5-plugins
 #dnf remove -y ${remove_packages[@]}
-dnf install -y ${rpmfusion[@]}
+#dnf install -y ${rpmfusion[@]}
 #copr
 #dnf copr enable -y ${copr[@]}
 #dnf install -y ${gnome[@]}
 dnf install -y ${cinnamon[@]}
 dnf install -y ${gaming[@]}
-dnf upgrade -y
+#dnf upgrade -y
 dnf autoremove -y
 
 rpm -qa | sort
