@@ -13,23 +13,30 @@ rpmfusion=(
 
 function copr(){
 dnf copr enable -y xxmitsu/mesa-git
-dnf copr enable -y g3tchoo/prismlauncher
 }
 
 gaming=(
 "steam"
-"goverlay"
+"bottles"
 "prismlauncher"
+"goverlay"
+"mangohud"
+"gamemode"
+"vkBasalt"
 )
 
 gnome=(
 "gnome-shell"
 "nautilus"
+"adw-gtk3-theme"
+"gnome-shell-extension-caffeine"
+"ffmpegthumbnailer"
 )
 
 cinnamon=(
 "cinnamon"
 "nemo"
+"adw-gtk3-theme"
 )
 
 remove_packages=(
@@ -50,27 +57,16 @@ remove_packages=(
 "yelp-xsl"
 )
 
-install_packages=(
-"adw-gtk3-theme"
-"gnome-shell-extension-caffeine"
-"ffmpegthumbnailer"
-)
-
 # DNF
-
 dnf install -y dnf5-plugins
 #dnf remove -y ${remove_packages[@]}
 dnf install -y ${rpmfusion[@]}
-copr
+#copr
 #dnf copr enable -y ${copr[@]}
 #dnf install -y ${gnome[@]}
 dnf install -y ${cinnamon[@]}
 dnf install -y ${gaming[@]}
-dnf install -y ${install_packages[@]}
 dnf upgrade -y
 dnf autoremove -y
 
 rpm -qa | sort
-
-dnf install -y fastfetch
-fastfetch
