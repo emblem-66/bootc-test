@@ -65,7 +65,7 @@ remove_packages=(
 #dnf copr enable -y ${copr[@]}
 #dnf install -y ${gnome[@]}
 dnf install -y ${cinnamon[@]}
-dnf install -y ${gaming[@]}
+#dnf install -y ${gaming[@]}
 #dnf upgrade -y
 dnf autoremove -y
 
