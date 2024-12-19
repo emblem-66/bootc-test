@@ -37,6 +37,7 @@ cinnamon=(
 "cinnamon"
 "nemo"
 "adw-gtk3-theme"
+"adwaita-icon-theme"
 )
 
 remove_packages=(
