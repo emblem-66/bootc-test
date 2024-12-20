@@ -75,4 +75,4 @@ function_dnf
 #function_gaming
 function_cleanup
 
-rpm -qa | sort
+rpm -qa | sort | grep mesa
