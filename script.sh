@@ -8,9 +8,14 @@ rpm -qa | sort
 function function_dnf(){
     # RPMFusion
     dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+    rpmfusion=(
+        "https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm"
+        "https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm"
+    )
+    #dnf install -y ${rpmfusion[@]}
     # Terra repos
-    sudo dnf install --repofrompath 'terra,https://repos.fyralabs.com/terra$releasever' --setopt='terra.gpgkey=https://repos.fyralabs.com/terra$releasever/key.asc' terra-release
-    sudo dnf install anda
+    sudo dnf install -y--repofrompath 'terra,https://repos.fyralabs.com/terra$releasever' --setopt='terra.gpgkey=https://repos.fyralabs.com/terra$releasever/key.asc' terra-release
+    sudo dnf install -y anda
     # COPR
     dnf copr enable -y xxmitsu/mesa-git
     dnf copr enable -y gui1ty/bottles
