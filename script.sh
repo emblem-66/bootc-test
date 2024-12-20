@@ -49,7 +49,6 @@ function function_gnome(){
     "yelp-libs"
     "yelp-xsl"
     )
-
 }
 
 # KDE
