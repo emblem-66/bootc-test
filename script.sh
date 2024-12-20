@@ -18,7 +18,7 @@ function function_dnf(){
     sudo sed -i 's/#AutomaticUpdatePolicy=none/AutomaticUpdatePolicy=stage/' /etc/rpm-ostreed.conf
     sudo sed -i 's/#LockLayering=false/LockLayering=true/' /etc/rpm-ostreed.conf
     systemctl enable rpm-ostreed-automatic.timer
-    }
+}
 
 # GNOME
 function function_gnome(){
