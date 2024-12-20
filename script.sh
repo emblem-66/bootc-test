@@ -2,17 +2,10 @@
 
 set -ouex pipefail
 
-rpm -qa | sort
-
-# Repos
-
-rpmfusion=(
-    "https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm"
-    "https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm"
-)
-
-function copr(){
-dnf copr enable -y xxmitsu/mesa-git
+# DNF
+function DNF(){
+    dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+    dnf copr enable -y xxmitsu/mesa-git
 }
 
 gaming=(
@@ -59,15 +52,17 @@ remove_packages=(
 )
 
 # DNF
-#dnf install -y dnf5-plugins
+
 #dnf remove -y ${remove_packages[@]}
 #dnf install -y ${rpmfusion[@]}
 #copr
 #dnf copr enable -y ${copr[@]}
 #dnf install -y ${gnome[@]}
-dnf install -y ${cinnamon[@]}
+#dnf install -y ${cinnamon[@]}
 #dnf install -y ${gaming[@]}
 #dnf upgrade -y
+
+DNF
 dnf autoremove -y
 
 rpm -qa | sort
