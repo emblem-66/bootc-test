@@ -2,8 +2,6 @@
 
 set -ouex pipefail
 
-rpm -qa | sort
-
 # DNF
 function function_dnf(){
     # RPMFusion
