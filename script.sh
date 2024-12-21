@@ -2,6 +2,8 @@
 
 set -ouex pipefail
 
+source /functions.sh
+
 # DNF
 function function_dnf(){
     # RPMFusion
@@ -69,9 +71,9 @@ function function_cleanup(){
 }
 
 # Functions
-function_dnf
+#function_dnf
 #function_gnome
 #function_gaming
-function_cleanup
+#function_cleanup
 
 rpm -qa | sort | grep mesa
