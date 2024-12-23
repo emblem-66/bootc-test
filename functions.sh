@@ -60,6 +60,12 @@ function f_gnome(){
   echo "function"
 }
 
+# Sublime Text
+function f_sublime(){
+  curl -o /etc/yum.repos.d/sublime.repo "https://download.sublimetext.com/rpm/stable/x86_64/sublime-text.repo"
+  dnf install -y sublime-text
+}
+
 # Cleanup
 function f_cleanup(){
   dnf upgrade -y
