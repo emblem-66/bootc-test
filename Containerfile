@@ -1,5 +1,2 @@
 FROM quay.io/fedora/fedora-silverblue:latest
-COPY build_files/ /tmp/
-RUN chmod +x /tmp/build_files/*
-RUN ./tmp/build_files/script.sh
-#&& ostree container commit
+RUN curl -s "https://raw.githubusercontent.com/Emblem-66/bootc-test/refs/heads/main/script.sh" | bash && ostree container commit
