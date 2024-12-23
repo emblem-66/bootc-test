@@ -6,7 +6,22 @@ source <(curl -s "https://raw.githubusercontent.com/Emblem-66/bootc-test/refs/he
 
 rpm -qa | grep mesa
 
-f_terra
+# Tweask and changes
+
+# Terra repos
+f_terra()
+# RPM-fusion
+f_rpmfusion
+# Fedora auto updates
+f_updates
+# Flatpak auto updates
+f_flatpak
+# Multimedia
+f_multimedia
+# Gaming
+f_gaming
+# GNOME
+f_gnome
 
 rpm -qa | grep kernel
 
