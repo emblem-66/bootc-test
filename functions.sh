@@ -59,3 +59,9 @@ function f_gaming(){
 function f_gnome(){
   echo "function"
 }
+
+# Cleanup
+function f_cleanup(){
+  dnf upgrade -y
+  dnf autoremove -y
+}
