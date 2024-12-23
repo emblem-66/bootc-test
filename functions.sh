@@ -121,7 +121,6 @@ function f_tailscale(){
 	dnf install -y tailscale
 	systemctl enable tailscaled
 	rpm -qa | sort | grep tailscale
-
 }
 
 # Distrobox
@@ -132,7 +131,6 @@ function f_distrobox(){
 	echo -e "[Unit]\nDescription=distrobox-upgrade Automatic Update Trigger\n\n[Timer]\nOnBootSec=1h\nOnUnitInactiveSec=1d\n\n[Install]\nWantedBy=timers.target\n" | sudo tee /etc/systemd/system/distrobox-upgrade.timer
 	systemctl enable distrobox-upgrade.timer
 	rpm -qa | sort | grep distrobox
-
 }
 
 # Sublime Text
