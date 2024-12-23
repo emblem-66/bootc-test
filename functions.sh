@@ -124,29 +124,8 @@ function f_tailscale(){
 function f_distrobox(){
 	dnf remove -y toolbox
 	dnf install -y distrobox
-
-	cat <<EOF | sudo tee /etc/systemd/system/distrobox-upgrade.service > /dev/null
-[Unit]
-Description=distrobox-upgrade Automatic Update
- 
-[Service]
-Type=simple
-ExecStart=distrobox-upgrade --all
-StandardOutput=null
-EOF
-	
-	cat <<EOF | sudo tee /etc/systemd/system/distrobox-upgrade.timer > /dev/null
-[Unit]
-Description=distrobox-upgrade Automatic Update Trigger
- 
-[Timer]
-OnBootSec=1h
-OnUnitInactiveSec=1d
- 
-[Install]
-WantedBy=timers.target
-EOF
-	
+	echo -e "[Unit]\nDescription=distrobox-upgrade Automatic Update\n\n[Service]\nType=simple\nExecStart=distrobox-upgrade --all\nStandardOutput=null\n" | sudo tee /etc/systemd/system/distrobox-upgrade.service
+	echo -e "[Unit]\nDescription=distrobox-upgrade Automatic Update Trigger\n\n[Timer]\nOnBootSec=1h\nOnUnitInactiveSec=1d\n\n[Install]\nWantedBy=timers.target\n" | sudo tee ~/etc/systemd/system/flatpak-update.timer
 	systemctl enable distrobox-upgrade.timer
 }
 
