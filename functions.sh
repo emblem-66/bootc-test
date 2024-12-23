@@ -52,11 +52,62 @@ function f_multimedia(){
 
 # Gaming
 function f_gaming(){
-  echo "function"
+  # Fedora
+  dnf install -y goverlay mangohud gamemode gamescope vkBassalt
+  # RPM Fusion
+  dnf install -y steam steam-devices
+  # Terra
+  dnf install -y umu-launcher
+  # COPR
+  dnf copr enable -y gui1ty/bottles
+  dnf install -y bottles
+  dnf copr enable -y atim/heroic-games-launcher
+  dnf install -y heroic-games-launcher-bin
+  dnf copr enable -y g3tchoo/prismlauncher
+  dnf install -y prismlauncher
+  dnf copr enable -y faugus/faugus-launcher
+  dnf install -y faugus-launcher
 }
 
 # GNOME
 function f_gnome(){
+  remove_packages=(
+  "gnome-classic-session"
+  "gnome-shell-extension-window-list"
+  "gnome-shell-extension-background-logo"
+  "gnome-shell-extension-launch-new-instance"
+  "gnome-shell-extension-apps-menu"
+  "gnome-shell-extension-places-menu"
+  "gnome-tour"
+  "yelp"
+  "yelp-libs"
+  "yelp-xsl"
+  )
+  dnf remove -y ${remove_packages[@]}
+  
+  install_packages=(
+  "adw-gtk3-theme"
+  "gnome-shell-extension-caffeine"
+  "gnome-shell-extension-light-style"
+  "gnome-shell-extension-just-perfection"
+  )
+  dnf install -y ${install_packages[@]}
+
+  install_applications=(
+  "ffmpegthumbnailer"
+  "gnome-tweaks"
+  "clapper"
+  "gnome-text-editor"
+  "loupe"
+  )
+  dnf install -y ${install_applications[@]}
+  
+  git clone https://github.com/mukul29/legacy-theme-auto-switcher-gnome-extension.git /usr/share/gnome-shell/extensions/legacyschemeautoswitcher@joshimukul29.gmail.com
+  git clone https://github.com/joaophi/tailscale-gnome-qs.git /tmp && mv /tmp/tailscale@joaophi.github.com /usr/share/gnome-shell/extensions/
+}
+
+# Tailscale
+function f_tailscale(){
   echo "function"
 }
 
@@ -68,6 +119,9 @@ function f_sublime(){
 
 # Cleanup
 function f_cleanup(){
+  # Firefox
+  dnf remove -y firefox firefox-langpacks
+  # Cleanup
   dnf upgrade -y
   dnf autoremove -y
 }
