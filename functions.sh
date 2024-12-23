@@ -134,7 +134,39 @@ function f_gnome(){
 
 # Tailscale
 function f_tailscale(){
-  echo "function"
+  curl -o /etc/yum.repos.d/_tailscale.repo "https://pkgs.tailscale.com/stable/fedora/tailscale.repo"
+  dnf install -y tailscale
+  systemctl enable tailscaled
+}
+
+# Distrobox
+function f_distrobox(){
+  dnf remove -y toolbox
+  dnf install -y distrobox
+
+  cat <<EOF | sudo tee /etc/systemd/system/distrobox-upgrade.service > /dev/null
+[Unit]
+Description=distrobox-upgrade Automatic Update
+ 
+[Service]
+Type=simple
+ExecStart=distrobox-upgrade --all
+StandardOutput=null
+EOF
+  
+  cat <<EOF | sudo tee /etc/systemd/system/distrobox-upgrade.timer > /dev/null
+[Unit]
+Description=distrobox-upgrade Automatic Update Trigger
+ 
+[Timer]
+OnBootSec=1h
+OnUnitInactiveSec=1d
+ 
+[Install]
+WantedBy=timers.target
+EOF
+  
+  systemctl enable distrobox-upgrade.timer
 }
 
 # Sublime Text
