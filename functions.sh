@@ -21,26 +21,9 @@ function f_updates(){
 
 # Flatpak auto updates
 function f_flatpak(){
-	cat <<EOF | sudo tee /etc/systemd/system/flatpak-update.service > /dev/null
-[Unit]
-Description=Update Flatpaks
-[Service]
-Type=oneshot
-ExecStart=/usr/bin/flatpak update -y
-[Install]
-WantedBy=default.target
-EOF
+	echo -e "[Unit]\nDescription=Update Flatpaks\n[Service]\nType=oneshot\nExecStart=/usr/bin/flatpak update -y\n[Install]\nWantedBy=default.target\n" | sudo tee ~/etc/systemd/system/flatpak-update.service
 	systemctl enable flatpak-update.service
-	
-	cat <<EOF | sudo tee /etc/systemd/system/flatpak-update.timer > /dev/null
-[Unit]
-Description=Update Flatpaks
-[Timer]
-OnCalendar=*:0/4
-Persistent=true
-[Install]
-WantedBy=timers.target
-EOF
+	echo -e "[Unit]\nDescription=Update Flatpaks\n[Timer]\nOnCalendar=*:0/4\nPersistent=true\n[Install]\nWantedBy=timers.target\n" | sudo tee ~/etc/systemd/system/flatpak-update.timer
 	systemctl enable flatpak-update.timer
 }
 
