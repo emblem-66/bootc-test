@@ -47,7 +47,33 @@ function f_flatpak(){
 
 # Multimedia
 function f_multimedia(){
-  echo "function"
+  install_packages=(
+  "ffmpeg"
+  "gstreamer1-plugin-libav"
+  "gstreamer1-plugins-bad-free-extras"
+  "gstreamer1-plugins-bad-freeworld"
+  "gstreamer1-plugins-ugly"
+  "gstreamer1-vaapi"
+  "libavcodec-freeworld"
+  )
+  
+  remove_packages=(
+  "noopenh264"
+  "ffmpeg-free"
+  "libavcodec-free"
+  "libavdevice-free"
+  "libavfilter-free"
+  "libavformat-free"
+  "libavutil-free"
+  "libpostproc-free"
+  "libswresample-free"
+  "libswscale-free"
+  )
+  
+  #rpm-ostree uninstall --idempotent ${remove_packages[@]}
+  #rpm-ostree install --idempotent --force-replacefiles ${install_packages[@]}
+  
+  dnf group install -y multimedia
 }
 
 # Gaming
