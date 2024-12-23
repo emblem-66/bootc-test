@@ -129,7 +129,10 @@ function f_gnome(){
 
 # Tailscale
 function f_tailscale(){
-	curl -o /etc/yum.repos.d/_tailscale.repo "https://pkgs.tailscale.com/stable/fedora/tailscale.repo"
+	#curl -o /etc/yum.repos.d/_tailscale.repo "https://pkgs.tailscale.com/stable/fedora/tailscale.repo"
+	#dnf install -y tailscale
+	#systemctl enable tailscaled
+	dnf config-manager -y addrepo --from-repofile=https://pkgs.tailscale.com/stable/fedora/tailscale.repo
 	dnf install -y tailscale
 	systemctl enable tailscaled
 }
@@ -169,8 +172,8 @@ function f_sublime(){
 	#curl -o /etc/yum.repos.d/sublime.repo "https://download.sublimetext.com/rpm/stable/x86_64/sublime-text.repo"
 	#dnf install -y sublime-text
 	rpm -v --import https://download.sublimetext.com/sublimehq-rpm-pub.gpg
-	dnf config-manager addrepo --from-repofile=https://download.sublimetext.com/rpm/stable/x86_64/sublime-text.repo
-	#dnf config-manager addrepo --from-repofile=https://download.sublimetext.com/rpm/dev/x86_64/sublime-text.repo
+	dnf config-manager -y addrepo --from-repofile=https://download.sublimetext.com/rpm/stable/x86_64/sublime-text.repo
+	#dnf config-manager -y addrepo --from-repofile=https://download.sublimetext.com/rpm/dev/x86_64/sublime-text.repo
 	dnf install -y sublime-text
 #	cat <<EOF | sudo tee /etc/yum.repos.d/sublime-text.repo > /dev/null
 #[sublime-text]
