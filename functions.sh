@@ -117,7 +117,7 @@ function f_tailscale(){
 	#curl -o /etc/yum.repos.d/_tailscale.repo "https://pkgs.tailscale.com/stable/fedora/tailscale.repo"
 	#dnf install -y tailscale
 	#systemctl enable tailscaled
-	dnf config-manager -y addrepo --from-repofile=https://pkgs.tailscale.com/stable/fedora/tailscale.repo
+	dnf config-manager addrepo --from-repofile=https://pkgs.tailscale.com/stable/fedora/tailscale.repo
 	dnf install -y tailscale
 	systemctl enable tailscaled
 	rpm -qa | sort | grep tailscale
@@ -141,9 +141,9 @@ function f_sublime(){
 	#curl -fsSL https://download.sublimetext.com/sublimehq-rpm-pub.gpg | rpm -v --import
 	curl -o sublimehq-rpm-pub.gpg "https://download.sublimetext.com/sublimehq-rpm-pub.gpg"
 	rpm -v --import sublimehq-rpm-pub.gpg
-	dnf config-manager -y addrepo --from-repofile=https://download.sublimetext.com/rpm/stable/x86_64/sublime-text.repo
+	dnf config-manager addrepo --from-repofile=https://download.sublimetext.com/rpm/stable/x86_64/sublime-text.repo
 	#dnf config-manager -y addrepo --from-repofile=https://download.sublimetext.com/rpm/dev/x86_64/sublime-text.repo
-	mkdir -p /opt/sublime_text/Icon/128x128/
+	#mkdir -p /opt/sublime_text/Icon/128x128/
 	dnf install -y sublime-text
 	rpm -qa | sort | grep sublime-text
 }
