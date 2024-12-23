@@ -139,13 +139,11 @@ function f_sublime(){
 	#dnf install -y sublime-text
 	#rpm -v --import https://download.sublimetext.com/sublimehq-rpm-pub.gpg
 	#curl -fsSL https://download.sublimetext.com/sublimehq-rpm-pub.gpg | rpm -v --import
-	
 	curl -o sublimehq-rpm-pub.gpg "https://download.sublimetext.com/sublimehq-rpm-pub.gpg"
 	rpm -v --import sublimehq-rpm-pub.gpg
-	
 	dnf config-manager -y addrepo --from-repofile=https://download.sublimetext.com/rpm/stable/x86_64/sublime-text.repo
 	#dnf config-manager -y addrepo --from-repofile=https://download.sublimetext.com/rpm/dev/x86_64/sublime-text.repo
-	dnf clean all -y
+	mkdir /opt/sublime_text/Icon/128x128/
 	dnf install -y sublime-text
 	rpm -qa | sort | grep sublime-text
 }
