@@ -144,7 +144,7 @@ function f_sublime(){
 	#dnf config-manager addrepo --from-repofile=https://download.sublimetext.com/rpm/stable/x86_64/sublime-text.repo
 	dnf config-manager addrepo --from-repofile=https://download.sublimetext.com/rpm/dev/x86_64/sublime-text.repo
 	#sudo mkdir -p /opt/sublime_text/Icon/128x128/
-	dnf install -y sublime-text
+	dnf install -y --refresh sublime-text
 	rpm -qa | sort | grep sublime-text
 }
 
