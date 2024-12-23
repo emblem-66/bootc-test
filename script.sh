@@ -18,12 +18,24 @@ f_updates
 f_flatpak
 # Multimedia
 f_multimedia
+# Fonts
+f_fonts
+# CachyOS Kernel
+f_cachy
+# Mesa-git
+f_mesa-git
 # Gaming
 f_gaming
 # GNOME
 f_gnome
-# Sublime
-#f_sublime
+# Tailscale
+f_tailscale
+# Distrobox
+f_distrobox
+# Sublime Text
+f_sublime
+# Cleanup
+f_cleanup
 
 rpm -qa | grep kernel
 
