@@ -2,7 +2,7 @@
 
 set -ouex pipefail
 
-source functions.sh
+source ./functions.sh
 
 f_terra
 
