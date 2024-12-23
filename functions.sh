@@ -74,7 +74,7 @@ function f_mesa-git(){
 # Gaming
 function f_gaming(){
 	# Fedora
-	dnf install -y goverlay mangohud gamemode gamescope vkBassalt
+	dnf install -y goverlay mangohud gamemode gamescope vkBasalt
 	# RPM Fusion
 	dnf install -y steam steam-devices
 	# Terra
