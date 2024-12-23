@@ -9,6 +9,7 @@ on:
     paths-ignore:
       - '**.md'
       - '**.txt'
+      - '**.sh'
   workflow_dispatch:
 
 jobs: 
