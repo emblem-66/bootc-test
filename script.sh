@@ -9,7 +9,7 @@ rpm -qa | grep mesa
 # Tweask and changes
 
 # Terra repos
-f_terra()
+f_terra
 # RPM-fusion
 f_rpmfusion
 # Fedora auto updates
