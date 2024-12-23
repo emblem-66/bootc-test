@@ -23,7 +23,7 @@ f_gaming
 # GNOME
 f_gnome
 # Sublime
-f_sublime
+#f_sublime
 
 rpm -qa | grep kernel
 
