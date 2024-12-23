@@ -45,7 +45,7 @@ function f_fonts(){
 # CachyOS Kernel
 function f_cachy(){
 	setsebool -P domain_kernel_load_modules on
- 	dnf remove -y kernel
+	dnf remove -y kernel
 	dnf copr enable -y bieszczaders/kernel-cachyos
 	dnf install -y kernel-cachyos kernel-cachyos-devel-matched
 	rpm -qa | sort | grep kernel
@@ -120,7 +120,7 @@ function f_tailscale(){
 	dnf config-manager -y addrepo --from-repofile=https://pkgs.tailscale.com/stable/fedora/tailscale.repo
 	dnf install -y tailscale
 	systemctl enable tailscaled
- 	rpm -qa | sort | grep tailscale
+	rpm -qa | sort | grep tailscale
 
 }
 
@@ -140,11 +140,14 @@ function f_sublime(){
 	#curl -o /etc/yum.repos.d/sublime.repo "https://download.sublimetext.com/rpm/stable/x86_64/sublime-text.repo"
 	#dnf install -y sublime-text
 	#rpm -v --import https://download.sublimetext.com/sublimehq-rpm-pub.gpg
-	#curl -fsSL https://download.sublimetext.com/sublimehq-rpm-pub.gpg | rpm -v --import -
+	#curl -fsSL https://download.sublimetext.com/sublimehq-rpm-pub.gpg | rpm -v --import
+	
 	curl -o sublimehq-rpm-pub.gpg "https://download.sublimetext.com/sublimehq-rpm-pub.gpg"
 	rpm -v --import sublimehq-rpm-pub.gpg
+	
 	dnf config-manager -y addrepo --from-repofile=https://download.sublimetext.com/rpm/stable/x86_64/sublime-text.repo
 	#dnf config-manager -y addrepo --from-repofile=https://download.sublimetext.com/rpm/dev/x86_64/sublime-text.repo
+	dnf clean all -y
 	dnf install -y sublime-text
 	rpm -qa | sort | grep sublime-text
 }
@@ -156,5 +159,5 @@ function f_cleanup(){
 	# Cleanup
 	dnf upgrade -y
 	dnf autoremove -y
- 	rpm -qa | sort
+	rpm -qa | sort
 }
