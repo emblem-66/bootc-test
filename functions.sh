@@ -45,8 +45,10 @@ function f_fonts(){
 # CachyOS Kernel
 function f_cachy(){
 	setsebool -P domain_kernel_load_modules on
+ 	dnf remove -y kernel
 	dnf copr enable -y bieszczaders/kernel-cachyos
 	dnf install -y kernel-cachyos kernel-cachyos-devel-matched
+	rpm -qa | sort | grep kernel
 }
 
 # Mesa-git
@@ -118,6 +120,8 @@ function f_tailscale(){
 	dnf config-manager -y addrepo --from-repofile=https://pkgs.tailscale.com/stable/fedora/tailscale.repo
 	dnf install -y tailscale
 	systemctl enable tailscaled
+ 	rpm -qa | sort | grep tailscale
+
 }
 
 # Distrobox
@@ -127,6 +131,8 @@ function f_distrobox(){
 	echo -e "[Unit]\nDescription=distrobox-upgrade Automatic Update\n\n[Service]\nType=simple\nExecStart=distrobox-upgrade --all\nStandardOutput=null\n" | sudo tee /etc/systemd/system/distrobox-upgrade.service
 	echo -e "[Unit]\nDescription=distrobox-upgrade Automatic Update Trigger\n\n[Timer]\nOnBootSec=1h\nOnUnitInactiveSec=1d\n\n[Install]\nWantedBy=timers.target\n" | sudo tee /etc/systemd/system/distrobox-upgrade.timer
 	systemctl enable distrobox-upgrade.timer
+	rpm -qa | sort | grep distrobox
+
 }
 
 # Sublime Text
@@ -135,9 +141,10 @@ function f_sublime(){
 	#dnf install -y sublime-text
 	#rpm -v --import https://download.sublimetext.com/sublimehq-rpm-pub.gpg
 	curl -fsSL https://download.sublimetext.com/sublimehq-rpm-pub.gpg | rpm -v --import -
-dnf config-manager -y addrepo --from-repofile=https://download.sublimetext.com/rpm/stable/x86_64/sublime-text.repo
+	dnf config-manager -y addrepo --from-repofile=https://download.sublimetext.com/rpm/stable/x86_64/sublime-text.repo
 	#dnf config-manager -y addrepo --from-repofile=https://download.sublimetext.com/rpm/dev/x86_64/sublime-text.repo
 	dnf install -y sublime-text
+	rpm -qa | sort | grep sublime-text
 }
 
 # Cleanup
@@ -147,4 +154,5 @@ function f_cleanup(){
 	# Cleanup
 	dnf upgrade -y
 	dnf autoremove -y
+ 	rpm -qa | sort
 }
