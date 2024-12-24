@@ -70,8 +70,8 @@ function f_cachy(){
 # Mesa-git Mesa Freeworld
 function f_mesa(){
 	#dnf copr enable -y xxmitsu/mesa-git
-dnf install -y mesa-va-drivers-freeworld
-dnf install -y mesa-vdpau-drivers-freeworld
+	dnf install -y mesa-va-drivers-freeworld
+	dnf install -y mesa-vdpau-drivers-freeworld
 }
 
 # Gaming
