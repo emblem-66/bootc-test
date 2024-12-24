@@ -95,13 +95,13 @@ function f_gaming(){
 	#wget -O heroic-latest.rpm $(curl -s https://api.github.com/repos/Heroic-Games-Launcher/HeroicGamesLauncher/releases/latest | jq -r '.assets[] | select(.name | contains ("rpm")) | .browser_download_url')
 	#dnf install -y heroic-latest.rpm
 
-	rpm -qa | sort | grep gamescope
-	rpm -qa | sort | grep gamemode
-	rpm -qa | sort | grep mangohud
-	rpm -qa | sort | grep wine
-	rpm -qa | sort | grep dxvk
-	rpm -qa | sort | grep vkd3d
-	rpm -qa | sort | grep tricks	
+	#rpm -qa | sort | grep gamescope
+	#rpm -qa | sort | grep gamemode
+	#rpm -qa | sort | grep mangohud
+	#rpm -qa | sort | grep wine
+	#rpm -qa | sort | grep dxvk
+	#rpm -qa | sort | grep vkd3d
+	#rpm -qa | sort | grep tricks	
 }
 
 function f_utils(){
