@@ -104,6 +104,10 @@ function f_gaming(){
 	rpm -qa | sort | grep tricks	
 }
 
+function f_utils(){
+	dnf install -y piper
+}
+
 # GNOME
 function f_gnome(){
 	remove_packages=(
