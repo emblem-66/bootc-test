@@ -73,12 +73,6 @@ function f_mesa(){
 	#dnf copr enable -y xxmitsu/mesa-git
 dnf install -y mesa-va-drivers-freeworld
 dnf install -y mesa-vdpau-drivers-freeworld
-
-
-        rpm-ostree override remove \
-                mesa-va-drivers \
-                --install=mesa-va-drivers-freeworld \
-                --install=mesa-vdpau-drivers-freeworld
 }
 
 # Gaming
