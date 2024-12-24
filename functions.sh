@@ -10,7 +10,7 @@ function f_terra(){
 function f_rpmfusion(){
 	dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
 	dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
-        dnf install -y rpmfusion-free-release rpmfusion-nonfree-release
+	dnf install -y rpmfusion-free-release rpmfusion-nonfree-release
 }
 
 # Fedora auto updates
@@ -31,22 +31,22 @@ function f_flatpak(){
 # Multimedia
 function f_multimedia(){
 	dnf group install -y multimedia
-rpm-ostree override remove \
-                ffmpeg-free \
-                libavcodec-free \
-                libavdevice-free \
-                libavfilter-free \
-                libavformat-free \
-                libavutil-free \
-                libpostproc-free \
-                libswresample-free \
-                libswscale-free \
-                --install=ffmpeg \
-                --install=gstreamer1-plugin-libav \
-                --install=gstreamer1-plugins-bad-free-extras \
-                --install=gstreamer1-plugins-bad-freeworld \
-                --install=gstreamer1-plugins-ugly \
-                --install=gstreamer1-vaapi
+	dnf remove -y \
+	ffmpeg-free \
+	libavcodec-free \
+	libavdevice-free \
+	libavfilter-free \
+	libavformat-free \
+	libavutil-free \
+	libpostproc-free \
+	libswresample-free \
+	libswscale-free \
+	--install=ffmpeg \
+	--install=gstreamer1-plugin-libav \
+	--install=gstreamer1-plugins-bad-free-extras \
+	--install=gstreamer1-plugins-bad-freeworld \
+	--install=gstreamer1-plugins-ugly \
+	--install=gstreamer1-vaapi
 }
 
 # Fonts
@@ -78,8 +78,8 @@ dnf install -y mesa-vdpau-drivers-freeworld
 # Gaming
 function f_gaming(){
 	# Fedora
-	dnf install -y goverlay mangohud gamemode gamescope vkBasalt wine vkd3d wine-dxvk winetricks protontricks 
-	# RPM Fusion
+	dnf install -y goverlay
+ 	# RPM Fusion
 	dnf install -y steam steam-devices
 	# Terra
 	dnf install -y umu-launcher
@@ -92,6 +92,17 @@ function f_gaming(){
 	#dnf install -y prismlauncher
 	#dnf copr enable -y faugus/faugus-launcher
 	#dnf install -y faugus-launcher
+	# Local RPM - Heroic
+	wget -O heroic-latest.rpm $(curl -s https://api.github.com/repos/Heroic-Games-Launcher/HeroicGamesLauncher/releases/latest | jq -r '.assets[] | select(.name | contains ("rpm")) | .browser_download_url')
+	dnf install -y heroic-latest.rpm
+
+	rpm -qa | sort | grep gamescope
+	rpm -qa | sort | grep gamemode
+	rpm -qa | sort | grep mangohud
+	rpm -qa | sort | grep wine
+	rpm -qa | sort | grep dxvk
+	rpm -qa | sort | grep vkd3d
+	rpm -qa | sort | grep tricks	
 }
 
 # GNOME
