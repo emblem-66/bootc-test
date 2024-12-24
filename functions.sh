@@ -78,7 +78,7 @@ function f_mesa(){
 function f_gaming(){
 	# Fedora
 	dnf install -y goverlay
- 	# RPM Fusion
+	# RPM Fusion
 	dnf install -y steam steam-devices
 	# Terra
 	dnf install -y umu-launcher
