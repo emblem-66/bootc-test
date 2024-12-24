@@ -15,7 +15,7 @@ f_updates
 # Flatpak auto updates
 f_flatpak
 # Multimedia
-f_multimedia
+#f_multimedia
 # Fonts
 f_fonts
 # CachyOS Kernel
