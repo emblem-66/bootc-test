@@ -93,7 +93,7 @@ function f_gaming(){
 	#dnf install -y faugus-launcher
 	# Local RPM - Heroic
 	wget -O heroic-latest.rpm $(curl -s https://api.github.com/repos/Heroic-Games-Launcher/HeroicGamesLauncher/releases/latest | jq -r '.assets[] | select(.name | contains ("rpm")) | .browser_download_url')
-	dnf install -y heroic-latest.rpm
+	#dnf install -y heroic-latest.rpm
 
 	rpm -qa | sort | grep gamescope
 	rpm -qa | sort | grep gamemode
