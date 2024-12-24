@@ -71,8 +71,8 @@ function f_gaming(){
 	dnf install -y heroic-games-launcher-bin
 	dnf copr enable -y g3tchoo/prismlauncher
 	dnf install -y prismlauncher
-	dnf copr enable -y faugus/faugus-launcher
-	dnf install -y faugus-launcher
+	#dnf copr enable -y faugus/faugus-launcher
+	#dnf install -y faugus-launcher
 }
 
 # GNOME
