@@ -51,9 +51,11 @@ function f_cachy(){
 	rpm -qa | sort | grep kernel
 }
 
-# Mesa-git
-function f_mesa-git(){
-	dnf copr enable -y xxmitsu/mesa-git
+# Mesa-git Mesa Freeworld
+function f_mesa(){
+	#dnf copr enable -y xxmitsu/mesa-git
+dnf install -y mesa-va-drivers-freeworld
+dnf install -y mesa-vdpau-drivers-freeworld
 }
 
 # Gaming
