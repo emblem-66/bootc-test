@@ -10,6 +10,10 @@ function f_terra(){
 function f_rpmfusion(){
 	dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
 	dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+        rpm-ostree install rpmfusion-free-release rpmfusion-nonfree-release \
+                --uninstall rpmfusion-free-release \
+                --uninstall rpmfusion-nonfree-release
+
 }
 
 # Fedora auto updates
@@ -30,6 +34,22 @@ function f_flatpak(){
 # Multimedia
 function f_multimedia(){
 	dnf group install -y multimedia
+rpm-ostree override remove \
+                ffmpeg-free \
+                libavcodec-free \
+                libavdevice-free \
+                libavfilter-free \
+                libavformat-free \
+                libavutil-free \
+                libpostproc-free \
+                libswresample-free \
+                libswscale-free \
+                --install=ffmpeg \
+                --install=gstreamer1-plugin-libav \
+                --install=gstreamer1-plugins-bad-free-extras \
+                --install=gstreamer1-plugins-bad-freeworld \
+                --install=gstreamer1-plugins-ugly \
+                --install=gstreamer1-vaapi
 }
 
 # Fonts
@@ -56,6 +76,12 @@ function f_mesa(){
 	#dnf copr enable -y xxmitsu/mesa-git
 dnf install -y mesa-va-drivers-freeworld
 dnf install -y mesa-vdpau-drivers-freeworld
+
+
+        rpm-ostree override remove \
+                mesa-va-drivers \
+                --install=mesa-va-drivers-freeworld \
+                --install=mesa-vdpau-drivers-freeworld
 }
 
 # Gaming
