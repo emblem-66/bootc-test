@@ -59,7 +59,7 @@ function f_mesa-git(){
 # Gaming
 function f_gaming(){
 	# Fedora
-	dnf install -y goverlay mangohud gamemode gamescope vkBasalt
+	dnf install -y goverlay mangohud gamemode gamescope vkBasalt wine vkd3d wine-dxvk winetricks protontricks 
 	# RPM Fusion
 	dnf install -y steam steam-devices
 	# Terra
