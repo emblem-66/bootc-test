@@ -45,7 +45,7 @@ function f_fonts(){
 # CachyOS Kernel
 function f_cachy(){
 	setsebool -P domain_kernel_load_modules on
-	dnf remove -y kernel
+	dnf remove -y kernel*
 	dnf copr enable -y bieszczaders/kernel-cachyos
 	dnf install -y kernel-cachyos kernel-cachyos-devel-matched
 	rpm -qa | sort | grep kernel
