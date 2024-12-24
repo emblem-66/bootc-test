@@ -10,10 +10,7 @@ function f_terra(){
 function f_rpmfusion(){
 	dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
 	dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
-        rpm-ostree install rpmfusion-free-release rpmfusion-nonfree-release \
-                --uninstall rpmfusion-free-release \
-                --uninstall rpmfusion-nonfree-release
-
+        dnf install -y rpmfusion-free-release rpmfusion-nonfree-release
 }
 
 # Fedora auto updates
