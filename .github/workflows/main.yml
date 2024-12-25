@@ -2,7 +2,7 @@ name: akubgsiegjsg
 
 on:
   schedule:
-    - cron: "0 6 * * 5"
+    - cron: "0 6 * * *"
   push:
     branches:
       - main
