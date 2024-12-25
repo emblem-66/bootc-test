@@ -17,19 +17,19 @@ f_flatpak
 # Multimedia
 #f_multimedia
 # Fonts
-f_fonts
+#f_fonts
 # CachyOS Kernel
 #f_cachy
 # Mesa-git
 #f_mesa
 # Gaming
-f_gaming
+#f_gaming
 # GNOME
-f_gnome
+#f_gnome
 # Tailscale
-f_tailscale
+#f_tailscale
 # Distrobox
-f_distrobox
+#f_distrobox
 # Sublime Text
 #f_sublime
 # Cleanup
