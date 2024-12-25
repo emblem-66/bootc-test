@@ -85,8 +85,8 @@ function f_gaming(){
 	# COPR
 	#dnf copr enable -y gui1ty/bottles
 	#dnf install -y bottles
-	#dnf copr enable -y atim/heroic-games-launcher
-	#dnf install -y heroic-games-launcher-bin
+	dnf copr enable -y atim/heroic-games-launcher
+	dnf install -y heroic-games-launcher-bin
 	#dnf copr enable -y g3tchoo/prismlauncher
 	#dnf install -y prismlauncher
 	#dnf copr enable -y faugus/faugus-launcher
