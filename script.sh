@@ -21,7 +21,7 @@ f_fonts
 # CachyOS Kernel
 #f_cachy
 # Mesa-git
-f_mesa
+#f_mesa
 # Gaming
 f_gaming
 # GNOME
