@@ -19,7 +19,7 @@ f_flatpak
 # Fonts
 f_fonts
 # CachyOS Kernel
-f_cachy
+#f_cachy
 # Mesa-git
 f_mesa
 # Gaming
