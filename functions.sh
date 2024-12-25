@@ -185,7 +185,7 @@ function f_cleanup(){
 	# Firefox
 	dnf remove -y firefox
 	# Cleanup
-	dnf upgrade -y
+	#dnf upgrade -y
 	dnf autoremove -y
 	rpm -qa | sort
 }
