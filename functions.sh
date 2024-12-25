@@ -122,27 +122,25 @@ function f_gnome(){
 	"yelp-libs"
 	"yelp-xsl"
 	)
-	dnf remove -y ${remove_packages[@]}
+	dnf remove -y gnome-shell-extension*
+	dnf remove -y gnome-tour
+	dnf remove -y yelp*
+	#dnf remove -y ${remove_packages[@]}
 	
 	install_packages=(
 	"adw-gtk3-theme"
 	"gnome-shell-extension-caffeine"
 	"gnome-shell-extension-light-style"
-	"gnome-shell-extension-just-perfection"
 	)
 	dnf install -y ${install_packages[@]}
 
 	install_applications=(
 	"ffmpegthumbnailer"
-	"gnome-tweaks"
-	"clapper"
-	"gnome-text-editor"
-	"loupe"
 	)
 	dnf install -y ${install_applications[@]}
 	
 	git clone https://github.com/mukul29/legacy-theme-auto-switcher-gnome-extension.git /usr/share/gnome-shell/extensions/legacyschemeautoswitcher@joshimukul29.gmail.com
-	git clone https://github.com/joaophi/tailscale-gnome-qs.git /tmp && mv /tmp/tailscale@joaophi.github.com /usr/share/gnome-shell/extensions/
+	#git clone https://github.com/joaophi/tailscale-gnome-qs.git /tmp && mv /tmp/tailscale@joaophi.github.com /usr/share/gnome-shell/extensions/
 }
 
 # Tailscale
@@ -154,6 +152,7 @@ function f_tailscale(){
 	dnf install -y tailscale
 	systemctl enable tailscaled
 	rpm -qa | sort | grep tailscale
+	git clone https://github.com/joaophi/tailscale-gnome-qs.git /tmp && mv /tmp/tailscale@joaophi.github.com /usr/share/gnome-shell/extensions/
 }
 
 # Distrobox
@@ -184,7 +183,7 @@ function f_sublime(){
 # Cleanup
 function f_cleanup(){
 	# Firefox
-	dnf remove -y firefox firefox-langpacks
+	dnf remove -y firefox
 	# Cleanup
 	dnf upgrade -y
 	dnf autoremove -y
