@@ -35,6 +35,6 @@ f_distrobox
 # Sublime Text
 #f_sublime
 # Cleanup
-f_cleanup
+#f_cleanup
 
 echo "done"
