@@ -1,19 +1,25 @@
 # Functions for Fedora
 
+# start
+
 # Terra repos
 function f_terra(){
-	curl -o /etc/yum.repos.d/terra.repo "https://raw.githubusercontent.com/terrapkg/subatomic-repos/main/terra.repo"
+	echo "Enabling Terra"
+	#curl -o /etc/yum.repos.d/terra.repo "https://raw.githubusercontent.com/terrapkg/subatomic-repos/main/terra.repo"
+	dnf config-manager addrepo --from-repofile=https://raw.githubusercontent.com/terrapkg/subatomic-repos/main/terra.repo
 	dnf install -y terra-release
 }
 
 # RPM-fusion
 function f_rpmfusion(){
+	echo "Enabling RPM fusion"
 	dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 	dnf install -y rpmfusion-free-release rpmfusion-nonfree-release
 }
 
 # Fedora auto updates
 function f_updates(){
+	echo "Enabling auto updates"
 	sudo sed -i 's/#AutomaticUpdatePolicy=none/AutomaticUpdatePolicy=stage/' /etc/rpm-ostreed.conf
 	sudo sed -i 's/#LockLayering=false/LockLayering=true/' /etc/rpm-ostreed.conf
 	systemctl enable rpm-ostreed-automatic.timer
@@ -46,6 +52,11 @@ function f_multimedia(){
 	--install=gstreamer1-plugins-bad-freeworld \
 	--install=gstreamer1-plugins-ugly \
 	--install=gstreamer1-vaapi
+}
+
+# Firefox
+function f_firefox(){
+	dnf remove -y firefox
 }
 
 # Fonts
@@ -85,8 +96,8 @@ function f_gaming(){
 	# COPR
 	#dnf copr enable -y gui1ty/bottles
 	#dnf install -y bottles
-	dnf copr enable -y atim/heroic-games-launcher
-	dnf install -y heroic-games-launcher-bin
+	#dnf copr enable -y atim/heroic-games-launcher
+	#dnf install -y heroic-games-launcher-bin
 	#dnf copr enable -y g3tchoo/prismlauncher
 	#dnf install -y prismlauncher
 	#dnf copr enable -y faugus/faugus-launcher
@@ -163,29 +174,22 @@ function f_distrobox(){
 	echo -e "[Unit]\nDescription=distrobox-upgrade Automatic Update\n\n[Service]\nType=simple\nExecStart=distrobox-upgrade --all\nStandardOutput=null\n" | sudo tee /etc/systemd/system/distrobox-upgrade.service
 	echo -e "[Unit]\nDescription=distrobox-upgrade Automatic Update Trigger\n\n[Timer]\nOnBootSec=1h\nOnUnitInactiveSec=1d\n\n[Install]\nWantedBy=timers.target\n" | sudo tee /etc/systemd/system/distrobox-upgrade.timer
 	systemctl enable distrobox-upgrade.timer
-	rpm -qa | sort | grep distrobox
 }
 
 # Sublime Text
 function f_sublime(){
+	echo "Installing Sublime Text"
 	#curl -o /etc/yum.repos.d/sublime.repo "https://download.sublimetext.com/rpm/stable/x86_64/sublime-text.repo"
 	#dnf install -y sublime-text
 	#rpm -v --import https://download.sublimetext.com/sublimehq-rpm-pub.gpg
 	#curl -fsSL https://download.sublimetext.com/sublimehq-rpm-pub.gpg | rpm -v --import
-	curl -o sublimehq-rpm-pub.gpg "https://download.sublimetext.com/sublimehq-rpm-pub.gpg"
-	rpm -v --import sublimehq-rpm-pub.gpg
+	#curl -o sublimehq-rpm-pub.gpg "https://download.sublimetext.com/sublimehq-rpm-pub.gpg"
+	#rpm -v --import sublimehq-rpm-pub.gpg
 	#dnf config-manager addrepo --from-repofile=https://download.sublimetext.com/rpm/stable/x86_64/sublime-text.repo
-	dnf config-manager addrepo --from-repofile=https://download.sublimetext.com/rpm/dev/x86_64/sublime-text.repo
+	#dnf config-manager addrepo --from-repofile=https://download.sublimetext.com/rpm/dev/x86_64/sublime-text.repo
 	#sudo mkdir -p /opt/sublime_text/Icon/128x128/
-	dnf install -y --refresh sublime-text
-	rpm -qa | sort | grep sublime-text
+	#dnf install -y --refresh sublime-text
+	#rpm -qa | sort | grep sublime-text
 }
 
-# Cleanup
-function f_cleanup(){
-	# Firefox
-	dnf remove -y firefox
-	# Cleanup
-	#dnf upgrade -y
-	rpm -qa | sort
-}
+# end
