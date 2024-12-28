@@ -7,7 +7,7 @@ RUN rpm -qa | sort
 FROM quay.io/fedora-ostree-desktops/silverblue:41
 RUN rpm -qa | sort
 
-FROM quay.io/fedora/silverblue:41
+FROM quay.io/fedora/fedora-silverblue:41
 RUN rpm -qa | sort
 
 
