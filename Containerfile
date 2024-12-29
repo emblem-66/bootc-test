@@ -1,4 +1,3 @@
-FROM quay.io/fedora-ostree-desktops/base-atomic:41
 
 FROM quay.io/fedora-ostree-desktops/base-atomic:rawhide
 
