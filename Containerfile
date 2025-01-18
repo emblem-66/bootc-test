@@ -1,11 +1,11 @@
 #FROM quay.io/fedora/fedora-silverblue:rawhide
-
-
 FROM ghcr.io/ublue-os/base-main:latest
-RUN rpm -qa | sort
+#FROM quay.io/fedora-ostree-desktops/base-atomic:rawhide
 
-FROM quay.io/fedora-ostree-desktops/base-atomic:rawhide
+
 RUN rpm -qa | sort
+RUN ls /etc/yum.repos.d/
+RUN cat /etc/rpm-ostreed.conf
 
 #RUN dnf install -y gdm gnome-shell ptyxis nautilus xdg-user-dirs xdg-user-dirs-gtk bash-completion && systemctl enable gdm && systemctl set-default graphical.target
 
