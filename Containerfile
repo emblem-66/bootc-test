@@ -1,6 +1,6 @@
 #FROM quay.io/fedora/fedora-silverblue:rawhide
 #FROM ghcr.io/ublue-os/base-main:latest
-#FROM quay.io/fedora-ostree-desktops/base-atomic:rawhide
+FROM quay.io/fedora-ostree-desktops/base-atomic:rawhide
 
 RUN dnf copr enable -y solopasha/hyprland \
 &&  dnf install -y hyprland
