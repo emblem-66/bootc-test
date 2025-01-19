@@ -3,7 +3,35 @@
 FROM quay.io/fedora-ostree-desktops/base-atomic:rawhide
 
 RUN dnf copr enable -y solopasha/hyprland \
-&&  dnf install -y hyprland
+&&  dnf install -y hyprland \
+&&  dnf install -y \
+xdg-desktop-portal-hyprland \
+hyprland-git \
+hyprland-legacyrenderer \
+hyprland-contrib \
+hyprland-plugins \
+hyprland-plugins-git \
+hyprpaper \
+hyprpicker \
+hypridle \
+hyprlock \
+hyprsunset \
+hyprpolkitagent \
+hyprsysteminfo \
+hyprland-autoname-workspaces \
+hyprshot \
+aylurs-gtk-shell \
+waybar-git \
+eww-git \
+cliphist \
+nwg-clipman \
+swww \
+waypaper \
+hyprnome \
+hyprdim \
+swaylock-effects \
+pyprland \
+mpvpaper
 
 RUN rpm -qa | sort
 
