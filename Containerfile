@@ -32,7 +32,7 @@ mpvpaper
 
 RUN rpm -qa | sort
 
-RUN dnf history
+RUN dnf history info
 
 #RUN dnf install -y gdm gnome-shell ptyxis nautilus xdg-user-dirs xdg-user-dirs-gtk bash-completion && systemctl enable gdm && systemctl set-default graphical.target
 
