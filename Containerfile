@@ -6,7 +6,6 @@ RUN dnf copr enable -y solopasha/hyprland \
 &&  dnf install -y hyprland \
 &&  dnf install -y \
 xdg-desktop-portal-hyprland \
-hyprland-legacyrenderer \
 hyprland-contrib \
 hyprland-plugins \
 hyprpaper \
