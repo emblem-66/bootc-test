@@ -3,8 +3,8 @@
 FROM quay.io/fedora-ostree-desktops/base-atomic:rawhide
 
 RUN dnf copr enable -y solopasha/hyprland \
-&&  dnf install -y hyprland \
-&&  dnf install -y \
+&&  dnf install -y hyprland
+RUN dnf install -y \
 xdg-desktop-portal-hyprland \
 hyprland-contrib \
 hyprland-plugins \
@@ -29,8 +29,6 @@ hyprdim \
 swaylock-effects \
 pyprland \
 mpvpaper
-
-RUN rpm -qa | sort
 
 RUN dnf history info
 
