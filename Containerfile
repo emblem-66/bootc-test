@@ -31,11 +31,6 @@ pyprland \
 mpvpaper && dnf history info
 
 
-RUN rpm -qa | sort > /tmp/packages-final.txt
-RUN diff /tmp/packages-base.txt /tmp/packages-final.txt
-
-RUN dnf history info
-
 #RUN dnf install -y gdm gnome-shell ptyxis nautilus xdg-user-dirs xdg-user-dirs-gtk bash-completion && systemctl enable gdm && systemctl set-default graphical.target
 
 #RUN curl -s "https://raw.githubusercontent.com/Emblem-66/bootc-test/refs/heads/main/script.sh" | bash && ostree container commit
