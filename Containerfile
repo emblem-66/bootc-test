@@ -3,8 +3,7 @@ FROM quay.io/fedora/fedora-sericea:latest
 #FROM ghcr.io/ublue-os/base-main:latest
 #FROM quay.io/fedora-ostree-desktops/base-atomic:rawhide
 RUN rpm -qa | sort
-#RUN dnf copr enable -y solopasha/hyprland \
-&&  dnf install -y hyprland
+#RUN dnf copr enable -y solopasha/hyprland && dnf install -y hyprland
 
 #RUN dnf install -y gdm gnome-shell ptyxis nautilus xdg-user-dirs xdg-user-dirs-gtk bash-completion && systemctl enable gdm && systemctl set-default graphical.target
 
