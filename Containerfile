@@ -1,4 +1,5 @@
-FROM quay.io/fedora/fedora-sericea:latest
+#FROM quay.io/fedora/fedora-sericea:latest
+FROM ghcr.io/wayblueorg/hyprland:latest
 #FROM quay.io/fedora/fedora-silverblue:rawhide
 #FROM ghcr.io/ublue-os/base-main:latest
 #FROM quay.io/fedora-ostree-desktops/base-atomic:rawhide
