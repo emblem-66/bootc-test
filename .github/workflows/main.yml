@@ -16,19 +16,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: Maximize build disk space (Only remove unwanted software)
-      uses: AdityaGarg8/remove-unwanted-software@v4.1
-      with:
-          remove-android: 'true'
-          remove-dotnet: 'true'
-          remove-haskell: 'true'
-          remove-codeql: 'true'
-          remove-docker-images: 'true'
-          remove-large-packages: 'true'
-          remove-cached-tools: 'true'
-          remove-swapfile: 'true'
-    - name: Setup Python
-      uses: actions/setup-python@v5.3.0
     - name: Checkout Push to Registry action
       uses: actions/checkout@v4
     - name: Build Image
