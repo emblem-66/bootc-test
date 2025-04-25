@@ -11,15 +11,13 @@
 #RUN curl -s "https://raw.githubusercontent.com/Emblem-66/bootc-test/refs/heads/main/script.sh" | bash && ostree container commit
 
 FROM quay.io/fedora/fedora-silverblue:latest
-RUN rpm -qa | sort
 
 FROM quay.io/fedora/fedora:latest
-RUN rpm -qa | sort
 
 FROM quay.io/fedora/fedora-bootc:latest
-RUN rpm -qa | sort
 
-FROM quay.io/fedora/fedora-minimal:latest
+#FROM quay.io/fedora/fedora-minimal:latest
+
 RUN rpm -qa | sort
 
 #RUN curl -s https://raw.githubusercontent.com/Emblem-66/ServerBlue/refs/heads/main/Instructions.sh | bash && rm -rf /tmp/* /var/* && ostree container commit
