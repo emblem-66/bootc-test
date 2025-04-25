@@ -14,7 +14,7 @@ FROM quay.io/fedora/fedora-silverblue:latest
 
 FROM quay.io/fedora/fedora:latest
 
-FROM quay.io/fedora/fedora-bootc:latest
+#FROM quay.io/fedora/fedora-bootc:latest
 
 #FROM quay.io/fedora/fedora-minimal:latest
 
