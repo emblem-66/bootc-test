@@ -18,7 +18,7 @@ dnf remove -y qemu-user-static* sssd*
 #systemctl enable tailscaled
 #systemctl enable sshd.service
 
-dnf -y install --nogpgcheck --repofrompath 'terra,https://repos.fyralabs.com/terra$releasever' terra-release{,-extras,-mesa} 
+#dnf -y install --nogpgcheck --repofrompath 'terra,https://repos.fyralabs.com/terra$releasever' terra-release{,-extras,-mesa} 
 #dnf -y install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 #dnf -y config-manager setopt "*terra*".priority=3 #"*terra*".exclude="nerd-fonts topgrade scx-tools scx-scheds steam python3-protobuf zlib-devel"
 #dnf -y config-manager setopt "terra-mesa".enabled=false
