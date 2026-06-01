@@ -5,8 +5,18 @@ rpm -qa --qf '%{NAME}\n' | sort
 
 rpm -qa --qf '%{NAME}.%{ARCH}\n' | sort > packagelist_start.txt
 
+dnf install -y 'dnf5-command(config-manager)'
+dnf install -y glibc-minimal-langpack glibc-langpack-en glibc-langpack-cs
+dnf remove -y glibc-all-langpacks
 
-
+# Debloat
+dnf remove -y qemu-user-static* sssd*
+# Tailscale
+#dnf config-manager addrepo --from-repofile=https://pkgs.tailscale.com/stable/fedora/tailscale.repo
+#dnf config-manager setopt tailscale-stable.enabled=0
+#dnf install -y --enablerepo='tailscale-stable' tailscale
+#systemctl enable tailscaled
+#systemctl enable sshd.service
 
 dnf -y install --nogpgcheck --repofrompath 'terra,https://repos.fyralabs.com/terra$releasever' terra-release{,-extras,-mesa} 
 #dnf -y install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
@@ -22,9 +32,9 @@ dnf config-manager setopt fedora-cisco-openh264.enabled=1
 
 #dnf config-manager setopt fedora-cisco-openh264.enabled=0
 
-#dnf config-manager addrepo --from-repofile=https://github.com/terrapkg/subatomic-repos/raw/main/terra.repo
+dnf config-manager addrepo --from-repofile=https://github.com/terrapkg/subatomic-repos/raw/main/terra.repo
 #sed -i '0,/enabled=0/s/enabled=0/enabled=1/' /etc/yum.repos.d/terra-mesa.repo
-#dnf config-manager setopt terra.enabled=1
+dnf config-manager setopt terra.enabled=1
 #dnf install -y --enablerepo='terra' terra-release
 #dnf install -y --enablerepo='terra' terra-release-extras
 #dnf install -y --enablerepo='terra' terra-release-mesa
@@ -73,16 +83,6 @@ dnf install -y --enablerepo='copr:copr.fedorainfracloud.org:peterwu:rendezvous' 
 
 dnf install -y papirus-icon-theme adw-gtk3-theme 
 
-# MergerFS
-#dnf copr enable -y errornointernet/mergerfs
-#dnf config-manager setopt copr:copr.fedorainfracloud.org:errornointernet:mergerfs.enabled=0
-#dnf install -y --enablerepo='copr:copr.fedorainfracloud.org:errornointernet:mergerfs' mergerfs
-#dnf install -y mergerfs
-#curl -fsSL --create-dirs -o /etc/yum.repos.d/mergerfs.repo \
-#https://raw.githubusercontent.com/emblem-66/bootc-config/refs/heads/main/system_files/etc/yum.repos.d/mergerfs.repo
-#dnf install -y mergerfs
-
-
 dnf install -y greetd tuigreet
 
 dnf copr enable -y yalter/niri
@@ -92,7 +92,6 @@ dnf install -y --enablerepo='copr:copr.fedorainfracloud.org:yalter:niri' niri
 dnf install -y \
     fuzzel \
     alacritty \
-    SwayNotificationCenter \
     swaybg \
     swayidle \
     swaylock \
@@ -101,81 +100,19 @@ dnf install -y \
     grim \
     slurp \
 
-
-# File system
-dnf install -y \
-    smartmontools \
-    btrfsd \
-    btrfsmaintenance \
-
 # Screen brightness
 dnf install -y ddcutil
 
 # Debug
 dnf install -y evtest
 
-# OpenRGB
-#dnf install -y openrgb
-
-# fancontrol
-#dnf install -y fancontrol-gui
-
-# Cockpit
-dnf install -y cockpit cockpit-podman
-
-# Podman
-dnf install -y podman podman-compose
-
-# Remove Firefox
-dnf remove -y firefox*
-
-# Toolbox Distrobox swap
-dnf remove -y toolbox
-dnf install -y distrobox
-
-
-dnf install -y libfreeaptx libldac fdk-aac
-
-# Remove GNOME stuff
-dnf remove -y \
-    *backgrounds* \
-    fedora-bookmarks \
-    fedora-chromium-config* \
-    fedora-flathub-remote \
-    fedora-third-party \
-    fedora-workstation-repositories \
-    gnome-classic-session \
-    gnome-shell-extension* \
-    gnome-software* \
-    gnome-tour \
-    malcontent-control \
-    qemu-user-static* \
-    sssd* \
-    virtualbox-guest-additions \
-    yelp* \
-    abrt \
-
 dnf autoremove -y
 
 dnf search winboat
 
-
-# Update tweaks
-sed -i 's|^ExecStart=.*|ExecStart=/usr/bin/bootc update --quiet|' /usr/lib/systemd/system/bootc-fetch-apply-updates.service
-sed -i 's|#AutomaticUpdatePolicy.*|AutomaticUpdatePolicy=stage|' /etc/rpm-ostreed.conf
-sed -i 's|#LockLayering.*|LockLayering=true|' /etc/rpm-ostreed.conf
-
-# Enable services
-systemctl preset-all
-systemctl --global preset-all
-
-
-
 echo "%wheel ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/90-passwordless-sudo
 cat /etc/sudoers.d/90-passwordless-sudo
 chmod 0440 /etc/sudoers.d/90-passwordless-sudo
-
-
 
 rpm -qa --qf '%{NAME}.%{ARCH}\n' | sort > packagelist_end.txt
 
