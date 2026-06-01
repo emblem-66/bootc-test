@@ -4,7 +4,7 @@ on:
 #  schedule:
 #    - cron: "0 0 * * *"
 env:
-  tag: ghcr.io/${{ github.actor }}/${{ github.event.repository.name }}:latest
+  tag: ghcr.io/${{ github.actor }}/${{ github.event.repository.name }}-niri:latest
 jobs: 
   build:
     runs-on: ubuntu-latest
