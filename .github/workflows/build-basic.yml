@@ -17,30 +17,42 @@ jobs:
     - name: Build image
       run: podman build -f Containerfile -t ${{ env.tag }} .
 
-    - name: Rechunk image with chunkah
-      run: |
-        # Export rootfs as a flat directory
-        CONTAINER=$(podman create ${{ env.tag }})
-        mkdir -p /tmp/rootfs
-        podman export $CONTAINER | tar -xC /tmp/rootfs
-        podman rm $CONTAINER
+#    - name: Rechunk image with chunkah
+#      run: |
+#        # Export rootfs as a flat directory
+#        CONTAINER=$(podman create ${{ env.tag }})
+#        mkdir -p /tmp/rootfs
+#        podman export $CONTAINER | tar -xC /tmp/rootfs
+#        podman rm $CONTAINER
 
         # Capture image config for label/metadata preservation
-        export CHUNKAH_CONFIG_STR="$(podman inspect ${{ env.tag }})"
+#        export CHUNKAH_CONFIG_STR="$(podman inspect ${{ env.tag }})"
 
         # Rechunk: mount the rootfs dir into /chunkah, pipe OCI archive back in
+#        podman run --rm \
+#          -v /tmp/rootfs:/chunkah:ro \
+#          --security-opt=label=disable \
+#          -e CHUNKAH_CONFIG_STR \
+#          quay.io/coreos/chunkah build \
+#            --max-layers 128 \
+#            --skip-special-files \
+#            --prune /sysroot/ \
+#            -t ${{ env.tag }} | podman load
+
+#        # Clean up
+#        rm -rf /tmp/rootfs
+        
+    - name: Rechunk image with chunkah
+      run: |
+        podman export $(podman create --name rechunk ${{ env.tag }}) | tar -xC /tmp/rootfs
+        podman rm rechunk
+        CHUNKAH_CONFIG_STR="$(podman inspect ${{ env.tag }})" \
         podman run --rm \
           -v /tmp/rootfs:/chunkah:ro \
           --security-opt=label=disable \
           -e CHUNKAH_CONFIG_STR \
-          quay.io/coreos/chunkah build \
-            --max-layers 128 \
-            --skip-special-files \
-            --prune /sysroot/ \
+          quay.io/coreos/chunkah build --max-layers 128 --skip-special-files --prune /sysroot/ \
             -t ${{ env.tag }} | podman load
-
-        # Clean up
-        rm -rf /tmp/rootfs
 
     - name: Push image
       run: podman push --creds=${{ github.actor }}:${{ secrets.GITHUB_TOKEN }} ${{ env.tag }}
