@@ -16,5 +16,14 @@ jobs:
       uses: actions/checkout@v6
     - name: Build image
       run: podman build -f Containerfile-niri -t ${{ env.tag }} .
+    - name: Rechunk image with chunkah
+      run: |
+        export CHUNKAH_CONFIG_STR="$(podman inspect ${{ env.tag }})"
+        podman run --rm \
+          --mount=type=image,src=${{ env.tag }},dest=/chunkah \
+          -e CHUNKAH_CONFIG_STR \
+          quay.io/coreos/chunkah build \
+            --max-layers 128 \
+            -t ${{ env.tag }} | podman load
     - name: Push image
       run: podman push --creds=${{ github.actor }}:${{ secrets.GITHUB_TOKEN }} ${{ env.tag }}
