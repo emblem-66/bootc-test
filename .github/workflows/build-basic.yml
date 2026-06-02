@@ -44,6 +44,7 @@ jobs:
         
     - name: Rechunk image with chunkah
       run: |
+        mkdir -p /tmp/rootfs
         podman export $(podman create --name rechunk ${{ env.tag }}) | tar -xC /tmp/rootfs
         podman rm rechunk
         CHUNKAH_CONFIG_STR="$(podman inspect ${{ env.tag }})" \
