@@ -19,10 +19,12 @@ jobs:
     - name: Rechunk image with chunkah
       run: |
         export CHUNKAH_CONFIG_STR="$(podman inspect ${{ env.tag }})"
+        podman save ${{ env.tag }} -o /tmp/original.tar
         podman run --rm \
-          --mount=type=image,src=${{ env.tag }},dest=/chunkah \
+          -v /tmp/original.tar:/chunkah.tar:ro \
           -e CHUNKAH_CONFIG_STR \
           quay.io/coreos/chunkah build \
+            --from oci-archive:/chunkah.tar \
             --max-layers 128 \
             -t ${{ env.tag }} | podman load
     - name: Push image
