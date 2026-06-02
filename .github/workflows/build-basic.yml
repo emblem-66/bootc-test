@@ -4,9 +4,8 @@ on:
   schedule:
     - cron: "0 0 * * *"
 env:
-  tag: base
-  file: Containerfile-{{ env.tag }}
-  repo: ghcr.io/${{ github.actor }}/${{ github.event.repository.name }}-{{ env.tag }}:latest
+  file: Containerfile
+  repo: ghcr.io/${{ github.actor }}/${{ github.event.repository.name }}:latest
 jobs: 
   build:
     runs-on: ubuntu-latest
