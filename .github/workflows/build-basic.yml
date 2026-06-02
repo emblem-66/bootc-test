@@ -4,6 +4,7 @@ on:
   schedule:
     - cron: "0 0 * * *"
 env:
+  file: Containerfile
   tag: ghcr.io/${{ github.actor }}/${{ github.event.repository.name }}:latest
 jobs: 
   build:
@@ -15,7 +16,10 @@ jobs:
     - name: Checkout action
       uses: actions/checkout@v6
     - name: Build image
-      run: podman build -f Containerfile -t ${{ env.tag }} .
+      run: |
+        podman build \
+          -f ${{ env.file }} \
+          -t ${{ env.tag }} .
 
 #    - name: Rechunk image with chunkah
 #      run: |
