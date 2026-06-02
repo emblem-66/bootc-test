@@ -55,5 +55,8 @@ jobs:
           quay.io/coreos/chunkah build --max-layers 128 --skip-special-files --prune /sysroot/ \
             -t ${{ env.tag }} | podman load
 
+#    - name: Push image
+#      run: podman push --creds=${{ github.actor }}:${{ secrets.GITHUB_TOKEN }} ${{ env.tag }}
+    
     - name: Push image
-      run: podman push --creds=${{ github.actor }}:${{ secrets.GITHUB_TOKEN }} ${{ env.tag }}
+      run: podman push --compression-format zstd:chunked --creds=${{ github.actor }}:${{ secrets.GITHUB_TOKEN }} ${{ env.tag }}
