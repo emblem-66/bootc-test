@@ -36,6 +36,7 @@ jobs:
           quay.io/coreos/chunkah build \
             --max-layers 128 \
             --skip-special-files \
+            --prune /sysroot/ \
             -t ${{ env.tag }} | podman load
 
         # Clean up
