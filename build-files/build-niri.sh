@@ -85,6 +85,14 @@ dnf install -y papirus-icon-theme adw-gtk3-theme
 
 dnf install -y greetd tuigreet
 
+echo "[terminal]" >> /etc/greetd/config.toml
+echo "vt = 1" >> /etc/greetd/config.toml
+echo "[default_session]" >> /etc/greetd/config.toml
+echo "command = "tuigreet --remember --asterisks --time --greet-align left --cmd niri-session"" >> /etc/greetd/config.toml
+echo "user = "greeter"" >> /etc/greetd/config.toml
+
+cat /etc/greetd/config.toml
+
 dnf copr enable -y yalter/niri
 dnf config-manager setopt copr:copr.fedorainfracloud.org:yalter:niri.enabled=0
 dnf install -y --enablerepo='copr:copr.fedorainfracloud.org:yalter:niri' niri
