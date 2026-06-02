@@ -62,5 +62,12 @@ jobs:
 #    - name: Push image
 #      run: podman push --creds=${{ github.actor }}:${{ secrets.GITHUB_TOKEN }} ${{ env.tag }}
     
+#    - name: Push image
+#      run: podman push --compression-format zstd:chunked --creds=${{ github.actor }}:${{ secrets.GITHUB_TOKEN }} ${{ env.tag }}
+
     - name: Push image
-      run: podman push --compression-format zstd:chunked --creds=${{ github.actor }}:${{ secrets.GITHUB_TOKEN }} ${{ env.tag }}
+      run: |
+        podman push \
+          --compression-format zstd:chunked \
+          --creds=${{ github.actor }}:${{ secrets.GITHUB_TOKEN }} \
+          ${{ env.tag }}
