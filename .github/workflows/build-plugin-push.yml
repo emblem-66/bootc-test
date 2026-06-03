@@ -23,7 +23,7 @@ jobs:
 #          password: ${{ secrets.GITHUB_TOKEN }}
 #
       - name: Build, rechunk, and push
-        uses: jharmison-redhat/action-bootc-build@latest
+        uses: jharmison-redhat/action-bootc-build@v1
         with:
           file: Containerfile-niri
           tag: ghcr.io/${{ github.actor }}/${{ github.event.repository.name }}-plugin-push:latest
