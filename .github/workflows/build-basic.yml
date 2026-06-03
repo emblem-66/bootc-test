@@ -21,6 +21,38 @@ jobs:
           -f ${{ env.file }} \
           -t ${{ env.repo }} .
 
+
+
+
+    - name: Upgrade Podman
+      run: |
+        sudo mkdir -p /etc/apt/keyrings
+        curl -fsSL https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/unstable/xUbuntu_24.04/Release.key \
+          | gpg --dearmor \
+          | sudo tee /etc/apt/keyrings/libcontainers.gpg > /dev/null
+        echo "deb [signed-by=/etc/apt/keyrings/libcontainers.gpg] \
+          https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/unstable/xUbuntu_24.04/ /" \
+          | sudo tee /etc/apt/sources.list.d/libcontainers.list
+        sudo apt update
+        sudo apt install -y podman
+
+
+    - name: Rechunk image with chunkah
+      run: |
+        export CHUNKAH_CONFIG_STR="$(podman inspect ${{ env.tag }})"
+        podman run --rm \
+          --mount=type=image,src=${{ env.tag }},dst=/chunkah \
+          --security-opt=label=disable \
+          -e CHUNKAH_CONFIG_STR \
+          quay.io/coreos/chunkah build \
+            --max-layers 128 \
+            --skip-special-files \
+            --prune /sysroot/ \
+            -t ${{ env.tag }} | podman load
+
+
+
+
 #    - name: Rechunk image with chunkah
 #      run: |
 #        # Export rootfs as a flat directory
@@ -46,18 +78,18 @@ jobs:
 #        # Clean up
 #        rm -rf /tmp/rootfs
         
-    - name: Rechunk image with chunkah
-      run: |
-        mkdir -p /tmp/rootfs
-        podman export $(podman create --name rechunk ${{ env.repo }}) | tar -xC /tmp/rootfs
-        podman rm rechunk
-        CHUNKAH_CONFIG_STR="$(podman inspect ${{ env.repo }})" \
-        podman run --rm \
-          -v /tmp/rootfs:/chunkah:ro \
-          --security-opt=label=disable \
-          -e CHUNKAH_CONFIG_STR \
-          quay.io/coreos/chunkah build --max-layers 128 --skip-special-files --prune /sysroot/ \
-            -t ${{ env.repo }} | podman load
+#    - name: Rechunk image with chunkah
+#      run: |
+#        mkdir -p /tmp/rootfs
+#        podman export $(podman create --name rechunk ${{ env.repo }}) | tar -xC /tmp/rootfs
+#        podman rm rechunk
+#        CHUNKAH_CONFIG_STR="$(podman inspect ${{ env.repo }})" \
+#        podman run --rm \
+#          -v /tmp/rootfs:/chunkah:ro \
+#          --security-opt=label=disable \
+#          -e CHUNKAH_CONFIG_STR \
+#          quay.io/coreos/chunkah build --max-layers 128 --skip-special-files --prune /sysroot/ \
+#            -t ${{ env.repo }} | podman load
 
 #    - name: Push image
 #      run: podman push --creds=${{ github.actor }}:${{ secrets.GITHUB_TOKEN }} ${{ env.repo }}
