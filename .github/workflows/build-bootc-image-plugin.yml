@@ -11,7 +11,9 @@ jobs:
       contents: read
       packages: write
     steps:
-      - uses: actions/checkout@v4
+    
+      - name: Checkout action
+        uses: actions/checkout@v6
 
       - name: Login to ghcr.io
         uses: redhat-actions/podman-login@v1
@@ -21,7 +23,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build, rechunk, and push
-        uses: jharmison-redhat/action-bootc-build@v1
+        uses: jharmison-redhat/action-bootc-build@latest
         with:
           file: Containerfile-niri
           tag: ghcr.io/${{ github.actor }}/${{ github.event.repository.name }}-plugin:latest
