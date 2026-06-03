@@ -1,0 +1,37 @@
+name: bootc-image-plugin-push
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 0 * * *"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Login to ghcr.io
+        uses: redhat-actions/podman-login@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build, rechunk, and push
+        uses: jharmison-redhat/action-bootc-build@v1
+        with:
+          file: Containerfile-niri
+          tag: ghcr.io/${{ github.actor }}/${{ github.event.repository.name }}-plugin-push:latest
+          push: "false"
+          max-layers: 128
+
+      - name: Push image
+        run: |
+          sudo podman push \
+            --compression-format zstd:chunked \
+            --compression-level 12 \
+            --force-compression \
+            ghcr.io/${{ github.actor }}/${{ github.event.repository.name }}-plugin-push:latest
