@@ -11,15 +11,17 @@ jobs:
       contents: read
       packages: write
     steps:
-      - uses: actions/checkout@v4
-
-      - name: Login to ghcr.io
-        uses: redhat-actions/podman-login@v1
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
+    
+      - name: Checkout action
+        uses: actions/checkout@v6
+        
+#      - name: Login to ghcr.io
+#        uses: redhat-actions/podman-login@v1
+#        with:
+#          registry: ghcr.io
+#          username: ${{ github.actor }}
+#          password: ${{ secrets.GITHUB_TOKEN }}
+#
       - name: Build, rechunk, and push
         uses: jharmison-redhat/action-bootc-build@v1
         with:
@@ -34,4 +36,5 @@ jobs:
             --compression-format zstd:chunked \
             --compression-level 12 \
             --force-compression \
+            --creds=${{ github.actor }}:${{ secrets.GITHUB_TOKEN }} \
             ghcr.io/${{ github.actor }}/${{ github.event.repository.name }}-plugin-push:latest
