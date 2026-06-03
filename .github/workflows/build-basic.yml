@@ -48,7 +48,7 @@ jobs:
             --max-layers 128 \
             --skip-special-files \
             --prune /sysroot/ \
-            -t ${{ env.tag }} | podman load
+            -t ${{ env.file }} | podman load
 
 
 
