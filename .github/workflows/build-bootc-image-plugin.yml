@@ -36,7 +36,7 @@ jobs:
           max-layers: 128
 
 
-- name: Compare layers with previous build
+      - name: Compare layers with previous build
         run: |
           NEW=$(skopeo inspect --raw docker://ghcr.io/${{ github.actor }}/${{ github.event.repository.name }}-niri:latest | jq -r '[.layers[].digest]')
           echo "Changed layers: $(diff <(echo $OLD | jq -r '.[]') <(echo $NEW | jq -r '.[]') | grep -c '^[<>]')"
