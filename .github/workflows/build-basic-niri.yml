@@ -4,7 +4,7 @@ on:
   schedule:
     - cron: "0 0 * * *"
 env:
-  file: Containerfile-niri
+  file: containerfile-niri
   repo: ghcr.io/${{ github.actor }}/${{ github.event.repository.name }}-niri:latest
 jobs: 
   build:
