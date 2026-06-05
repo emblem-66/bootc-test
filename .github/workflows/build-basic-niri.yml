@@ -4,7 +4,7 @@ on:
   schedule:
     - cron: "0 0 * * *"
 env:
-  file: containerfile-niri
+  file: containerfile-base
   repo: ghcr.io/${{ github.actor }}/${{ github.event.repository.name }}-niri:latest
 jobs: 
   build:
@@ -29,6 +29,11 @@ jobs:
         large-packages: true
         docker-images: true
         swap-storage: true
+
+    - name: Compare layers with previous build
+      run: |
+        OLD=$(skopeo inspect --raw docker://ghcr.io/${{ github.actor }}/${{ github.event.repository.name }}-plugin:latest 2>/dev/null | jq -r '[.layers[].digest]' || echo "[]")
+          
     
     - name: Build image
       run: |
@@ -87,4 +92,8 @@ jobs:
 
 
 
+    - name: Compare layers with previous build
+      run: |
+        NEW=$(skopeo inspect --raw docker://ghcr.io/${{ github.actor }}/${{ github.event.repository.name }}-plugin:latest | jq -r '[.layers[].digest]')
+        echo "Changed layers: $(diff <(echo $OLD | jq -r '.[]') <(echo $NEW | jq -r '.[]') | grep -c '^[<>]')"
 
