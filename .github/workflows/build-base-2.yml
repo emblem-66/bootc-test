@@ -1,4 +1,4 @@
-name: bootc-image-plugin
+name: jharmison-redhat push
 on:
   workflow_dispatch:
   schedule:
