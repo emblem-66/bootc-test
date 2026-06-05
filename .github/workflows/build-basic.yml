@@ -54,9 +54,9 @@ jobs:
 
     - name: Rechunk image with chunkah
       run: |
-        export CHUNKAH_CONFIG_STR="$(podman inspect ${{ env.file }})"
+        export CHUNKAH_CONFIG_STR="$(podman inspect ${{ env.repo }})"
         podman run --rm \
-          --mount=type=image,src=${{ env.file }},dst=/chunkah \
+          --mount=type=image,src=${{ env.repo }},dst=/chunkah \
           --security-opt=label=disable \
           -e CHUNKAH_CONFIG_STR \
           quay.io/coreos/chunkah build \
