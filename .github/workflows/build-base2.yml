@@ -1,4 +1,4 @@
-name: bootc-image-plugin-push
+name: jharmison-redhat/action-bootc-build | podman push zstd:chunked
 on:
   workflow_dispatch:
   schedule:
@@ -31,7 +31,7 @@ jobs:
       - name: Build, rechunk, and push
         uses: jharmison-redhat/action-bootc-build@v1
         with:
-          file: containerfile-niri
+          file: containerfile-base
           tag: ghcr.io/${{ github.actor }}/${{ github.event.repository.name }}-plugin-push:latest
           push: "false"
           max-layers: 128
