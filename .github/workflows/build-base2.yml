@@ -1,4 +1,4 @@
-name: jharmison-redhat/action-bootc-build | podman push zstd:chunked
+name: jharmison-redhat | podman push zstd:chunked
 on:
   workflow_dispatch:
   schedule:
