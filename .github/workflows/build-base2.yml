@@ -13,7 +13,7 @@ jobs:
     steps:
     
       - name: Checkout action
-        uses: actions/checkout@v6
+        uses: actions/checkout@v6.0.3
         
 #      - name: Login to ghcr.io
 #        uses: redhat-actions/podman-login@v1
