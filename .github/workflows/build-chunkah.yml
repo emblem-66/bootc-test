@@ -1,0 +1,33 @@
+name: Build Image (reusable)
+
+on:
+  workflow_dispatch:
+#  schedule:
+#    - cron: "0 0 * * *"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Action Checkout
+        uses: actions/checkout@main
+
+      - name: Build image (buildah-build)
+        id: build
+        uses: redhat-actions/buildah-build@main
+        with:
+          image: chunkah-test
+          tags: latest
+          containerfiles: containerfile-chunkah
+
+      - name: Push to GHCR
+        uses: redhat-actions/push-to-registry@main
+        with:
+          image: chunkah-test
+          tags: latest
+          registry: ghcr.io/${{ github.repository_owner }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
