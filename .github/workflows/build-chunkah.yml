@@ -44,11 +44,16 @@ jobs:
           | podman load
 
       - name: Compare layers with previous build
+        env:
+          IMAGE: chunkah-test
+          TAG: latest
         run: |
           set -euo pipefail
 
-          REMOTE_IMAGE="ghcr.io/${{ github.actor }}/chunkah-test:latest"
+          REMOTE_IMAGE="ghcr.io/${{ github.repository_owner }}/${IMAGE}:${TAG}"
           LOCAL_IMAGE="${IMAGE}:${TAG}"
+
+          command -v skopeo >/dev/null || (sudo apt-get update && sudo apt-get install -y skopeo)
 
           skopeo inspect "docker://${REMOTE_IMAGE}" 2>/dev/null | jq -r '.Layers[]' | sort > old-layers.txt || touch old-layers.txt
           podman inspect "${LOCAL_IMAGE}" | jq -r '.[0].RootFS.Layers[]' | sort > new-layers.txt
